@@ -1,0 +1,9 @@
+database:
+  host: localhost
+  port: 5432
+  user: postgres
+  password: ${DB_PASSWORD}
+  name: expense_tracker
+
+telegram:
+  token: ${TELEGRAM_TOKEN}
