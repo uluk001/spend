@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/uluk001/spend/internal/model"
+	// "github.com/uluk001/spend/internal/repository"
 )
 
 type UserRepo struct {
@@ -29,7 +30,7 @@ func (r *UserRepo) GetByID(id int) (*model.User, error) {
     return &user, nil
 }
 
-func (r *UserRepo) Update(id uint, user *model.User) (*model.User, error) {
+func (r *UserRepo) Update(id int, user *model.User) (*model.User, error) {
     var existingUser model.User
 
     if err := r.db.GetDB().First(&existingUser, id).Error; err != nil {
@@ -50,4 +51,13 @@ func (r *UserRepo) Update(id uint, user *model.User) (*model.User, error) {
     }
 
     return &updatedUser, nil
+}
+
+func (r *UserRepo) Delete(id int) (err error) {
+    var existingUser model.User
+    if err := r.db.GetDB().Delete(&existingUser, id).Error; err != nil {
+        return fmt.Errorf("User with %d id doesn't found", id);
+    };
+
+    return nil
 }
